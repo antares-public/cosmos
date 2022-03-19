@@ -96,7 +96,7 @@ function init() {
     emissive: 0xf66120,
     specular: 0xffed22,
     shininess: 10,
-    shading: THREE.FlatShading,
+    flatShading: THREE.FlatShading,
     transparent: 1,
     opacity: 1,
   });
@@ -105,7 +105,7 @@ function init() {
     emissive: 0xf66120,
     specular: 0xffed22,
     shininess: 10,
-    shading: THREE.FlatShading,
+    flatShading: THREE.FlatShading,
     transparent: 1,
     opacity: 1,
   });
@@ -117,17 +117,17 @@ function init() {
   var material = new THREE.MeshPhongMaterial({
     color: 0xffc12d,
     emissive: 0xffc12d,
-    shading: THREE.FlatShading,
+    flatShading: THREE.FlatShading,
   });
   var material2 = new THREE.MeshPhongMaterial({
     color: 0x26d7e7,
     emissive: 0x26d7e7,
-    shading: THREE.FlatShading,
+    flatShading: THREE.FlatShading,
   });
   var material4 = new THREE.MeshPhongMaterial({
     color: 0xacacac,
     emissive: 0xacacac,
-    shading: THREE.FlatShading,
+    flatShading: THREE.FlatShading,
   });
 
   sun = new THREE.Mesh(new THREE.IcosahedronGeometry(10, 1), pinkMat);
@@ -160,7 +160,7 @@ function init() {
   var material3 = new THREE.MeshLambertMaterial({
     color: 0xffffff,
     emissive: 0xffffff,
-    shading: THREE.FlatShading,
+    flatShading: THREE.FlatShading,
   });
   mesh = new THREE.Mesh(geometry3, material3);
   earthPivot3.add(mesh);
@@ -203,7 +203,7 @@ function init() {
   stats = new Stats();
   container = document.getElementById("container");
   container.appendChild(renderer.domElement);
-  window.addEventListener("resize", onWindowResize, false);
+  window.addEventListener("resize", onWindowResize, false, { passive: false });
   info = document.getElementById("contentTitle");
   subtitle = document.getElementById("subtitle");
   description = document.getElementById("description");
@@ -235,7 +235,6 @@ function onMouseDown(event) {
   var intersects = raycaster.intersectObjects(objects);
   currentcolor = intersects[0].object.material.color.getHex();
   if (intersects.length > 0) {
-    console.log(currentcolor);
     switch (intersects[0].object.geometry.type) {
       case "IcosahedronGeometry":
         if (currentcolor == 0xf66120) {
@@ -392,9 +391,8 @@ function onMouseDown(event) {
         break;
     }
   }
-  console.log("Down");
 }
-document.addEventListener("mousedown", onMouseDown, false);
+document.addEventListener("mousedown", onMouseDown, false, { passive: false });
 
 function animate() {
   var timer = 0.00001 * Date.now();
