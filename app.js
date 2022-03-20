@@ -16,44 +16,6 @@ var mesh;
 var planetViewed = 0;
 init();
 animate();
-$(window).on("load", function () {
-  TweenMax.to($("#welcome"), 1, {
-    css: {
-      opacity: 1,
-    },
-    ease: Quad.easeInOut,
-  });
-  TweenMax.to($("#social"), 0.5, {
-    css: {
-      bottom: "20px",
-    },
-    delay: 0.5,
-    ease: Quad.easeInOut,
-  });
-  TweenMax.to($("#border"), 0.5, {
-    css: {
-      height: "200px",
-    },
-    delay: 0.5,
-    ease: Quad.easeInOut,
-  });
-});
-
-function hideWelcome() {
-  TweenMax.to($("#welcome"), 0.5, {
-    css: {
-      opacity: 0,
-    },
-    ease: Quad.easeInOut,
-  });
-  TweenMax.to($("#welcome"), 0.5, {
-    css: {
-      display: "none",
-    },
-    delay: 1,
-    ease: Quad.easeInOut,
-  });
-}
 
 function init() {
   camera = new THREE.PerspectiveCamera(
@@ -64,7 +26,7 @@ function init() {
   );
   camera.position.z = 68;
   controls = new THREE.OrbitControls(camera);
-  controls.maxDistance = 300;
+  controls.maxDistance = 100;
   controls.minDistance = 30;
   scene = new THREE.Scene();
   var geoSphere = new THREE.SphereGeometry(Math.random() * 1, 20, 20);
@@ -80,8 +42,6 @@ function init() {
       )
     );
   }
-  var posX = -3000;
-  var posY = -3000;
   for (var i = 0; i < sphereTab.length; i++) {
     sphereTab[i].position.set(
       Math.random() * 600 - 300,
